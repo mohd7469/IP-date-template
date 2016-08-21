@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>| reverence</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="./fonts/roboto_stylesheet.css"/>
+    <link rel="stylesheet" href="./fonts/fontawesome_stylesheet.css"/>
+    <link rel="icon" href="leo.png"/>
+    <style media="screen">
+        body {
+            background: #000000;
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        .IP-logs {
+            margin-top: -27em;
+        }
+
+        #message {
+            max-width: 400px;
+            margin: 5em auto;
+            box-shadow: 0 1px 3px 0 #9E9E9E, 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+            border-radius: 2px;
+            background: rgba(15, 151, 249, 0);
+            padding: 16px 24px;
+        }
+    </style>
+    <script src="bower_components/angular.js"></script>
+    <script src="bower_components/firebase.js"></script>
+    <script src="bower_components/angularfire.min.js"></script>
+    <script src="./todo.js"></script>
+
+</head>
+<body ng-app="todo">
+<div id="message" class="blankstate blankstate-migrate animated fadeInDown">
+    <h1 style="font-family: robotothin">It happens</h1>
+
+    <p style="font-family: robotolight;color: #880404">1-Aug-2016</p>
+</div>
+<center>
+    <div style="color:  rgba(177, 177, 177, 0.05);margin-top: 7em;font-family: robotothin">
+        <i class="fa fa-pencil-square-o"></i>
+        I feel too much. That's what's going on, Do you think one can feel too much? Or just feel <br/>
+        in the wrong ways? My insides don't match up with my outsides. Maybe that's <br/>
+        what a person's personality : is the difference between inside and outside.<br/>
+        i wonder if everyone thinks it's worse for him. Probably, But it really <br/>
+        is worse for me so just because that is why 'm such a looser.....
+    </div>
+</center>
+
+<div ng-controller="counterCtrl">
+    <div class="IP-logs" style="display: none;">
+        <div ng-repeat="num in counter">
+            <button ng-click="removeTask(num)">x</button>
+            <i style="color: grey">
+                {{num.date}} {{num.date}}
+            </i>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
