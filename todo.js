@@ -112,20 +112,57 @@ var today = curHour + ":" + curMinute + ":" + curSeconds + curMeridiem + " " + d
  */
 var app = angular.module("todo", ["firebase"]);
 app.constant("MY_FIREBASE_URL", "https://demosaylani.firebaseio.com/messages");
+app.constant("MY_FIREBASE_MSG", "https://demosaylani.firebaseio.com/msg");
 
-app.controller("counterCtrl", function ($scope, $firebaseArray, MY_FIREBASE_URL) {
+app.controller("counterCtrl", function ($scope, $firebaseArray, MY_FIREBASE_URL,MY_FIREBASE_MSG) {
+
   var ref = new Firebase(MY_FIREBASE_URL);
   var messages = $firebaseArray(ref);
+
+  var msgRef = new Firebase(MY_FIREBASE_MSG);
+  var personalMsg = $firebaseArray(msgRef);
+
+//  $scope.myPersonalMsg="hey you! please do not come back again";
+  $scope.saveMyMsg = function (msg) {
+    personalMsg.$remove(0);
+    var myPersonalMsg = $scope.myPersonalMsg;
+    $scope.myPersonalMsg = '';
+
+    setTimeout(function () {
+      personalMsg.$add({myPersonalMsg:myPersonalMsg});
+    },1000);
+
+    setTimeout(function () {
+      $scope.displatMyPersonalMsg = personalMsg[(personalMsg.length)-1];
+    },3000);
+
+  };
+  $scope.displatMyPersonalMsg = personalMsg[(personalMsg.length)-1];
+
+  $scope.displatMyPersonalMsg = $firebaseArray(msgRef);
+
+  $scope.removeMyMsg = function () {
+    var mymsglength = personalMsg.length;
+    for(var i=0;i<personalMsg.length;i++){
+      personalMsg.$remove(i);
+    }
+      console.log('empty');
+  };
+
+
+
+
+  $scope.lastSeen='unknown access';
   $scope.counter ={
     date: today
   };
   $scope.saveTask = function () {
-//    console.log($scope.counter.date);
     var today=$scope.counter.date;
-//    messages.$add($scope.counter);
     setTimeout(function () {
       messages.$add({date:today,IP:fullIP});
-    },3000)
+      var len = messages.length;
+      $scope.lastSeen=$scope.counter[len-1];
+    },3000);
 
     setTimeout(function () {
       for(var i=0;i<messages.length;i++){

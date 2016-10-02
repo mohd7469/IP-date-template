@@ -5,58 +5,105 @@
     <link rel="stylesheet" href="./style.css"/>
     <link rel="stylesheet" href="./fonts/roboto_stylesheet.css"/>
     <link rel="stylesheet" href="./fonts/fontawesome_stylesheet.css"/>
+    <link rel="stylesheet" href="./bootstrap.min.css"/>
+    <link rel="stylesheet" href="./mdb.min.css"/>
     <link rel="icon" href="leo.png"/>
     <style media="screen">
-        body {
-            background: #000000;
-            color: rgba(0, 0, 0, 0.87);
+        .displayNone{
+            display: ;
+        }
+        .list-group-item:first-child{
+            border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+            border: 1px solid red;
+        }
+        .list-group-item{
+            background-color: transparent;
+            color: #007E33;
         }
 
-        .IP-logs {
-            margin-top: -27em;
-        }
+            .IP-logs {
+                margin-top: -27em;
+            }
+            .need {
+                color: #000000;
+                margin-top: -4em;
+            }
 
-        #message {
-            max-width: 400px;
-            margin: 5em auto;
-            box-shadow: 0 1px 3px 0 #9E9E9E, 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
-            border-radius: 2px;
-            background: rgba(15, 151, 249, 0);
-            padding: 16px 24px;
-        }
-    </style>
+            a:hover {
+                color: red;
+            }
+
+            #message {
+                max-width: 400px;
+                margin: 5em auto;
+                box-shadow: 0 1px 3px 0 #9E9E9E, 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+                border-radius: 2px;
+                background: rgba(15, 151, 249, 0);
+                padding: 16px 24px;
+            }
+        </style>
     <script src="bower_components/angular.js"></script>
     <script src="bower_components/firebase.js"></script>
     <script src="bower_components/angularfire.min.js"></script>
     <script src="./todo.js"></script>
 
 </head>
-<body ng-app="todo">
-<div id="message" class="blankstate blankstate-migrate animated fadeInDown">
-    <h1 style="font-family: robotothin">It happens</h1>
-
-    <p style="font-family: robotolight;color: #880404">1-Aug-2016</p>
-</div>
-<center>
-    <div style="color:  rgba(177, 177, 177, 0.05);margin-top: 7em;font-family: robotothin">
-        <i class="fa fa-pencil-square-o"></i>
-        I feel too much. That's what's going on, Do you think one can feel too much? Or just feel <br/>
-        in the wrong ways? My insides don't match up with my outsides. Maybe that's <br/>
-        what a person's personality : is the difference between inside and outside.<br/>
-        i wonder if everyone thinks it's worse for him. Probably, But it really <br/>
-        is worse for me so just because that is why 'm such a looser.....
-    </div>
-</center>
-
+<body ng-app="todo" style="background-image: url('a.jpg');background-attachment: fixed; height: 550px;">
 <div ng-controller="counterCtrl">
-    <div class="IP-logs" style="display: none;">
-        <div ng-repeat="num in counter">
-            <button ng-click="removeTask(num)">x</button>
-            <i style="color: grey">
-                {{num.date}} {{num.date}}
-            </i>
-        </div>
+
+    <div id="message" class="blankstate blankstate-migrate animated fadeInDown">
+        <h1 style="font-family: robotothin">It happens.</h1>
+
+        <p style="font-family:robotolight ;color: #880404">2-Aug-2016
+            <span style="font-size:0.5em;font-family:robotothin_italic;color: #ffffff">12:09 am</span>
+        </p>
+
+        <center style="color:  #9e9e9e;font-family: robotothin">
+            <small>last seen {{lastSeen.date || ''}}
+            </small>
+            <br/>
+            <sub></sub>
+            <small>IP {{lastSeen.IP || ''}}</small>
+        </center>
+        <small style="color: #ffffff;font-family: robotothin">
+            <a id="msgLink" href="./index.html"
+               title="refresh">
+                <i class="fa fa-refresh"></i>
+            </a>
+        </small>
     </div>
+    <center class="need" style="font-family: robotothin">
+        {{displatMyPersonalMsg[0].myPersonalMsg}}
+        <div class="displayNone" style="margin: 1em">
+            <div class="md-form">
+                <input type="text" ng-model="myPersonalMsg" id="form1" class="form-control">
+                <label for="form1" class="">Example label</label>
+            </div>
+            <input type="button" value="save" ng-click="saveMyMsg(myPersonalMsg)"/>
+            <input type="button" value="removeAllMsg" ng-click="removeMyMsg()"/>
+        </div>
+    </center>
+
+    <ul class="list-group">
+        <center>
+            <a style="margin: 1em;" class="waves-effect" href="https://www.google.com/maps/place/24%C2%B054'28.6%22N+67%C2%B001'35.6%22E/@24.9082143,67.0249631,725m/data=!3m1!1e3!4m5!3m4!1s0x0:0x0!8m2!3d24.907937!4d67.026551" target="_blank">
+                <i style="color: #000000" class="fa fa-map-marker">... </i> Friday at 7:50pm
+            </a>
+        </center>
+        <li class="list-group-item" ng-repeat="num in counter">
+            <button class="displayNone" ng-click="removeTask(num)">x</button>
+            {{num.IP}} {{num.date}}
+        </li>
+    </ul>
+    <!--<div class="IP-logs" style="">-->
+        <!--<div ng-repeat="num in counter">-->
+            <!--<button ng-click="removeTask(num)">x</button>-->
+            <!--<i style="color: grey">-->
+                <!--{{num.IP}} {{num.date}}-->
+            <!--</i>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 
 </body>
